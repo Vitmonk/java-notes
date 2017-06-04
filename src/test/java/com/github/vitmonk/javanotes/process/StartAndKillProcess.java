@@ -6,15 +6,16 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Starting and killing process programmatically.
+ */
 public class StartAndKillProcess {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StartAndKillProcess.class);
 
     private static final int PROCESS_LIFESPAN_IN_SECONDS = 8;
-
-    // For naked IDEs without helpful plugins
-    public static void main(String[] args) throws Exception {
-        new StartAndKillProcess().testProcessKill();
-    }
 
     @Test
     public void testProcessKill() throws Exception {
@@ -22,7 +23,7 @@ public class StartAndKillProcess {
         Process process = new ProcessBuilder("ping", "bing.com", "-n", "100").start();
         // java.lang.Runtime
         // Process process = Runtime.getRuntime().exec("ping bing.com -n 100");
-        System.out.println("Started process");
+        LOGGER.info("Started process");
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -33,11 +34,11 @@ public class StartAndKillProcess {
 
             if (processShouldBeKilled(stopWatch)) {
                 process.destroyForcibly();
-                System.err.println("DESTROY PROCESS EMITTED!");
+                LOGGER.info("DESTROY PROCESS EMITTED!");
             }
-            System.out.println(outputLine);
+            LOGGER.info(outputLine);
         }
-        System.out.println("Process destroyed");
+        LOGGER.info("Process destroyed");
     }
 
     private boolean processShouldBeKilled(StopWatch stopWatch) {
