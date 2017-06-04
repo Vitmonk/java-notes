@@ -5,3 +5,6 @@ Various java notes / answers to questions
 Question: How do I kill running process created with ProcessBuilder.start() or Runtime.exec(..)?   
 
 Answer: [StartAndKillProcess](src/test/java/com/github/vitmonk/javanotes/process/StartAndKillProcess.java)
+
+## Java compiler - nothing is perfect
+List with objects of different types (Apples and Oranges together in one Collection): [JavaCompilerCollectiobExploitTests](src/test/java/com/github/vitmonk/javanotes/compiler/JavaCompilerCollectiobExploitTests.java)
